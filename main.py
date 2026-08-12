@@ -155,61 +155,79 @@ def company_briefing(ticker: str = "NUE"):
 # ---------------------------------------------------------------------------
 # Automated / live data
 # ---------------------------------------------------------------------------
-def _fetch_live_prices():
-    """Pull live equity prices/market caps (cached). Falls back to reference
-    values from companies.json so the widget never breaks."""
-    now = time.time()
-    c = _CACHE["live_prices"]
-    if c["data"] and (now - c["ts"]) < _CACHE_TTL:
-        return c["data"]
+def _fallback_rows():
+    """Reference values from companies.json — always available, never blocks."""
+    return [
+        {
+            "Ticker": t,
+            "Price": None,
+            "Day %": None,
+            "Market Cap ($B)": comp.get("market_cap_usd_b"),
+            "Source": "reference (filings)",
+        }
+        for t, comp in COMPANIES.items()
+    ]
+
+
+def _live_rows():
+    """Fetch live equity data. Raises on failure so the caller can fall back."""
+    import yfinance as yf  # lazy import: never breaks config/static widgets
 
     rows = []
+    yt = yf.Tickers(" ".join(COMPANIES.keys()))
+    for t, comp in COMPANIES.items():
+        price = daypct = mcap = None
+        source = "reference (filings)"
+        try:
+            fi = yt.tickers[t].fast_info
+            price = getattr(fi, "last_price", None)
+            prev = getattr(fi, "previous_close", None)
+            mcap = getattr(fi, "market_cap", None)
+            if price and prev:
+                daypct = (price / prev - 1.0) * 100.0
+            if price:
+                source = "live (market data)"
+        except Exception:
+            pass
+        if mcap is None and comp.get("market_cap_usd_b"):
+            mcap = comp["market_cap_usd_b"] * 1e9
+        rows.append(
+            {
+                "Ticker": t,
+                "Price": round(price, 2) if price else None,
+                "Day %": round(daypct, 2) if daypct is not None else None,
+                "Market Cap ($B)": round(mcap / 1e9, 1) if mcap else comp.get("market_cap_usd_b"),
+                "Source": source,
+            }
+        )
+    return rows
+
+
+def _fetch_live_prices():
+    """Time-bounded live fetch (cached). If the market feed is slow or blocked,
+    return reference values fast instead of ever hanging the widget."""
+    import concurrent.futures
+
+    now = time.time()
+    c = _CACHE["live_prices"]
+    if c["data"] and (now - c["ts"]) < c.get("ttl", _CACHE_TTL):
+        return c["data"]
+
+    live_ok = False
     try:
-        import yfinance as yf  # lazy import: a yfinance problem never breaks config/static widgets
-
-        yt = yf.Tickers(" ".join(COMPANIES.keys()))
-        for t, comp in COMPANIES.items():
-            price = daypct = mcap = None
-            source = "reference (filings)"
-            try:
-                fi = yt.tickers[t].fast_info
-                price = getattr(fi, "last_price", None)
-                prev = getattr(fi, "previous_close", None)
-                mcap = getattr(fi, "market_cap", None)
-                if price and prev:
-                    daypct = (price / prev - 1.0) * 100.0
-                if price:
-                    source = "live (market data)"
-            except Exception:
-                pass
-            if mcap is None and comp.get("market_cap_usd_b"):
-                mcap = comp["market_cap_usd_b"] * 1e9
-            rows.append(
-                {
-                    "Ticker": t,
-                    "Price": round(price, 2) if price else None,
-                    "Day %": round(daypct, 2) if daypct is not None else None,
-                    "Market Cap ($B)": round(mcap / 1e9, 1) if mcap else comp.get("market_cap_usd_b"),
-                    "Source": source,
-                }
-            )
+        with concurrent.futures.ThreadPoolExecutor(max_workers=1) as ex:
+            rows = ex.submit(_live_rows).result(timeout=8)
+        live_ok = any(r["Source"].startswith("live") for r in rows)
     except Exception:
-        rows = []
+        rows = _fallback_rows()
 
-    if not rows:  # total fallback — still shows something useful
-        for t, comp in COMPANIES.items():
-            rows.append(
-                {
-                    "Ticker": t,
-                    "Price": None,
-                    "Day %": None,
-                    "Market Cap ($B)": comp.get("market_cap_usd_b"),
-                    "Source": "reference (filings)",
-                }
-            )
+    if not rows:
+        rows = _fallback_rows()
 
     c["data"] = rows
     c["ts"] = now
+    # If live worked, cache 10 min; if we fell back, retry sooner (90s).
+    c["ttl"] = _CACHE_TTL if live_ok else 90
     return rows
 
 

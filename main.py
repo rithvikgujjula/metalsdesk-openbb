@@ -262,16 +262,21 @@ def live_prices():
 
 @app.get("/steel_spread")
 def steel_spread():
-    """Metric: EAF steel metal spread (HRC minus prime scrap)."""
+    """Metric: US EAF metal spread — HRC (SMU, $/short ton) minus prime
+    busheling scrap (RMDAS, $/gross ton), spread expressed in $/short ton."""
     hrc = SPREAD.get("hrc_price")
     scrap = SPREAD.get("scrap_price")
-    unit = SPREAD.get("unit", "$/ton")
-    spread = (hrc - scrap) if (hrc is not None and scrap is not None) else None
+    g2s = SPREAD.get("gross_to_short", 1.12)
+    spread = None
+    if hrc is not None and scrap is not None:
+        spread = round(hrc - (scrap / g2s))  # convert scrap $/gross ton -> $/short ton
     data = [
-        {"label": "HRC (hot-rolled coil)", "value": f"${hrc}{'/ton' if unit=='$/ton' else ''}", "delta": None},
-        {"label": "Prime scrap (busheling)", "value": f"${scrap}{'/ton' if unit=='$/ton' else ''}", "delta": None},
-        {"label": "Steel metal spread", "value": f"${spread}/ton" if spread is not None else "n/a", "delta": None},
-        {"label": "As of", "value": SPREAD.get("as_of", ""), "delta": None},
+        {"label": "HRC — SMU ($/short ton)", "value": f"${hrc:,}", "delta": None},
+        {"label": "Busheling — RMDAS ($/gross ton)", "value": f"${scrap:,}", "delta": None},
+        {"label": "EAF metal spread ($/short ton)", "value": f"${spread:,}" if spread is not None else "n/a", "delta": None},
+        {"label": "HRC as of", "value": SPREAD.get("hrc_as_of", ""), "delta": None},
+        {"label": "Scrap as of", "value": SPREAD.get("scrap_as_of", ""), "delta": None},
+        {"label": "Basis", "value": "Benchmark · SMU weekly / RMDAS monthly", "delta": None},
     ]
     return JSONResponse(content=data)
 
@@ -283,10 +288,11 @@ def data_sources():
     return (
         "### Data sources\n\n"
         "- **Equity prices, daily move, market cap** — pulled automatically from live market "
-        "data on load (cached ~10 min). Falls back to reference values if the feed is unavailable.\n"
-        f"- **Steel crack spread (HRC − prime scrap)** — HRC from {SPREAD.get('hrc_source','')}; "
-        f"scrap from {SPREAD.get('scrap_source','')}. Reference values as of {SPREAD.get('as_of','')} "
-        "(real-time steel/scrap prints are subscription-only via SMU / CRU / Platts).\n"
+        "data (Finnhub) on load, cached ~10 min. Falls back to reference values if the feed is unavailable.\n"
+        f"- **US EAF steel spread (HRC − busheling scrap)** — HRC from {SPREAD.get('hrc_source','')} "
+        f"(as of {SPREAD.get('hrc_as_of','')}); scrap from {SPREAD.get('scrap_source','')} "
+        f"(as of {SPREAD.get('scrap_as_of','')}). Published benchmarks on a weekly (HRC) / monthly (scrap) "
+        "cadence — not a live tick. Real-time prints are subscription-only via SMU / CRU / Fastmarkets.\n"
         "- **Capacity & segment fundamentals** — company filings / 10-Ks (reference data, changes rarely).\n"
         "- **Trader briefings** — analyst commentary.\n\n"
         f"*Backend last responded: {updated}.*"

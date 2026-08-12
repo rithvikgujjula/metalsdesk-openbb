@@ -4,13 +4,16 @@
     "as_of": "2026-08-12"
   },
   "steel_spread": {
-    "hrc_price": 960,
-    "scrap_price": 430,
-    "unit": "$/ton",
-    "hrc_source": "US Midwest HRC (CME / Steel Market Update)",
-    "scrap_source": "Prime busheling scrap (Steel Market Update)",
-    "as_of": "2026-08-12",
-    "note": "EAF metal spread = HRC selling price minus prime scrap input. Update these two numbers to refresh the spread."
+    "hrc_price": 1165,
+    "hrc_unit": "$/short ton",
+    "hrc_source": "SMU weekly HR coil assessment",
+    "hrc_as_of": "2026-07-28",
+    "scrap_price": 415,
+    "scrap_unit": "$/gross ton",
+    "scrap_source": "RMDAS/MSA prime busheling (US)",
+    "scrap_as_of": "Aug 2026 buy month",
+    "gross_to_short": 1.12,
+    "note": "US EAF metal spread = HRC minus prime busheling scrap - the margin that drives Nucor and Steel Dynamics. HRC in $/short ton (SMU, published weekly); scrap in $/gross ton (RMDAS, settles monthly). Spread shown in $/short ton with scrap converted at 1 gross ton = 1.12 short tons. Benchmark data on weekly/monthly cadence, not a live tick. Update HRC weekly and scrap monthly from the cited sources."
   },
   "companies": {
     "NUE": {
@@ -23,7 +26,7 @@
       "metrics": [
         { "label": "Market Cap", "value": "$40.0B", "delta": null },
         { "label": "Steel Capacity", "value": "~27 Mt/yr", "delta": null },
-        { "label": "HRC List Price", "value": "$960/ton", "delta": "3.2" },
+        { "label": "HRC Spot Price", "value": "$1,145/st", "delta": "0.9" },
         { "label": "Share of US Capacity", "value": "~25–30%", "delta": null },
         { "label": "Furnace Type", "value": "EAF (scrap)", "delta": null }
       ],
@@ -33,7 +36,7 @@
         { "product": "Structural", "capacity_mt": 4.5 },
         { "product": "Plate", "capacity_mt": 3.5 }
       ],
-      "briefing": "### Nucor (NUE) — trader read\n\n- **Largest US steelmaker**, ~25–30% of domestic capacity, all electric-arc-furnace (scrap-fed) — low fixed cost, flexes with demand.\n- **HRC list at $960/ton**, raised on tariff support; EAF margins geared to scrap spread.\n- **Diversified mix**: sheet, bar, structural, plate — less cyclical than a pure flat-rolled name.\n- **Watch**: scrap prices, non-residential construction, tariff headlines."
+      "briefing": "### Nucor (NUE) — trader read\n\n- **Largest US steelmaker**, ~25–30% of domestic capacity, all electric-arc-furnace (scrap-fed) — low fixed cost, flexes with demand.\n- **HRC spot ~$1,145/st**, raised on Section 232 tariff support; EAF margins geared to scrap spread.\n- **Diversified mix**: sheet, bar, structural, plate — less cyclical than a pure flat-rolled name.\n- **Watch**: scrap prices, non-residential construction, tariff headlines."
     },
     "STLD": {
       "name": "Steel Dynamics, Inc.",

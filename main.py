@@ -16,6 +16,7 @@ briefing; every widget reads from it.
 """
 
 import json
+import os
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -169,29 +170,32 @@ def _fallback_rows():
     ]
 
 
-def _stooq_quote(ticker):
-    """Fetch one quote line from Stooq (keyless, works from datacenters)."""
-    import urllib.request, csv, io
+FINNHUB_KEY = os.getenv("FINNHUB_KEY", "").strip()
 
-    sym = ticker.lower() + ".us"
-    url = f"https://stooq.com/q/l/?s={sym}&f=sd2t2ohlcvn&h&e=csv"
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+
+def _finnhub_quote(ticker):
+    """Fetch one quote from Finnhub. Returns dict with c/dp/pc or None."""
+    import urllib.request, json as _json
+
+    url = f"https://finnhub.io/api/v1/quote?symbol={ticker}&token={FINNHUB_KEY}"
     try:
-        with urllib.request.urlopen(req, timeout=6) as r:
-            text = r.read().decode("utf-8", "replace")
-        return next(csv.DictReader(io.StringIO(text)), None)
+        with urllib.request.urlopen(url, timeout=6) as r:
+            return _json.loads(r.read().decode("utf-8", "replace"))
     except Exception:
         return None
 
 
 def _live_rows():
-    """Fetch live equity closes from Stooq (concurrent). Market cap stays as
-    reference (Stooq doesn't provide it). Any ticker that fails shows reference."""
+    """Fetch live equity prices from Finnhub (concurrent). Market cap stays as
+    reference. Any ticker that fails shows reference values."""
     import concurrent.futures
+
+    if not FINNHUB_KEY:  # no key configured -> all reference, fast
+        return _fallback_rows()
 
     quotes = {}
     with concurrent.futures.ThreadPoolExecutor(max_workers=5) as ex:
-        futs = {ex.submit(_stooq_quote, t): t for t in COMPANIES}
+        futs = {ex.submit(_finnhub_quote, t): t for t in COMPANIES}
         for fut in concurrent.futures.as_completed(futs):
             quotes[futs[fut]] = fut.result()
 
@@ -201,13 +205,13 @@ def _live_rows():
         price = daypct = None
         source = "reference (filings)"
         try:
-            close = float(q["Close"])
-            openp = float(q["Open"])
-            if close == close and close > 0:  # not NaN
-                price = round(close, 2)
-                if openp > 0:
-                    daypct = round((close / openp - 1.0) * 100.0, 2)
-                source = "live close (Stooq)"
+            cur = float(q.get("c") or 0)  # current price
+            dp = q.get("dp")              # percent change
+            if cur > 0:
+                price = round(cur, 2)
+                if dp is not None:
+                    daypct = round(float(dp), 2)
+                source = "live (Finnhub)"
         except Exception:
             pass
         rows.append(

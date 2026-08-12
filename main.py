@@ -16,6 +16,8 @@ briefing; every widget reads from it.
 """
 
 import json
+import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
@@ -25,6 +27,11 @@ from fastapi.responses import JSONResponse
 BASE = Path(__file__).parent.resolve()
 DATA = json.load((BASE / "data" / "companies.json").open())
 COMPANIES = DATA["companies"]
+SPREAD = DATA.get("steel_spread", {})
+
+# Simple in-process cache so we don't hit the market data API on every widget load.
+_CACHE = {"live_prices": {"ts": 0.0, "data": None}}
+_CACHE_TTL = 600  # seconds
 
 app = FastAPI(
     title="MetalsDesk",
@@ -143,3 +150,103 @@ def company_capacity_table(ticker: str = "NUE"):
 def company_briefing(ticker: str = "NUE"):
     """Markdown: the trader read for the selected company."""
     return _company(ticker)["briefing"]
+
+
+# ---------------------------------------------------------------------------
+# Automated / live data
+# ---------------------------------------------------------------------------
+def _fetch_live_prices():
+    """Pull live equity prices/market caps (cached). Falls back to reference
+    values from companies.json so the widget never breaks."""
+    now = time.time()
+    c = _CACHE["live_prices"]
+    if c["data"] and (now - c["ts"]) < _CACHE_TTL:
+        return c["data"]
+
+    rows = []
+    try:
+        import yfinance as yf  # lazy import: a yfinance problem never breaks config/static widgets
+
+        yt = yf.Tickers(" ".join(COMPANIES.keys()))
+        for t, comp in COMPANIES.items():
+            price = daypct = mcap = None
+            source = "reference (filings)"
+            try:
+                fi = yt.tickers[t].fast_info
+                price = getattr(fi, "last_price", None)
+                prev = getattr(fi, "previous_close", None)
+                mcap = getattr(fi, "market_cap", None)
+                if price and prev:
+                    daypct = (price / prev - 1.0) * 100.0
+                if price:
+                    source = "live (market data)"
+            except Exception:
+                pass
+            if mcap is None and comp.get("market_cap_usd_b"):
+                mcap = comp["market_cap_usd_b"] * 1e9
+            rows.append(
+                {
+                    "Ticker": t,
+                    "Price": round(price, 2) if price else None,
+                    "Day %": round(daypct, 2) if daypct is not None else None,
+                    "Market Cap ($B)": round(mcap / 1e9, 1) if mcap else comp.get("market_cap_usd_b"),
+                    "Source": source,
+                }
+            )
+    except Exception:
+        rows = []
+
+    if not rows:  # total fallback — still shows something useful
+        for t, comp in COMPANIES.items():
+            rows.append(
+                {
+                    "Ticker": t,
+                    "Price": None,
+                    "Day %": None,
+                    "Market Cap ($B)": comp.get("market_cap_usd_b"),
+                    "Source": "reference (filings)",
+                }
+            )
+
+    c["data"] = rows
+    c["ts"] = now
+    return rows
+
+
+@app.get("/live_prices")
+def live_prices():
+    """Table: live equity price, daily move and market cap per covered name."""
+    return JSONResponse(content=_fetch_live_prices())
+
+
+@app.get("/steel_spread")
+def steel_spread():
+    """Metric: EAF steel metal spread (HRC minus prime scrap)."""
+    hrc = SPREAD.get("hrc_price")
+    scrap = SPREAD.get("scrap_price")
+    unit = SPREAD.get("unit", "$/ton")
+    spread = (hrc - scrap) if (hrc is not None and scrap is not None) else None
+    data = [
+        {"label": "HRC (hot-rolled coil)", "value": f"${hrc}{'/ton' if unit=='$/ton' else ''}", "delta": None},
+        {"label": "Prime scrap (busheling)", "value": f"${scrap}{'/ton' if unit=='$/ton' else ''}", "delta": None},
+        {"label": "Steel metal spread", "value": f"${spread}/ton" if spread is not None else "n/a", "delta": None},
+        {"label": "As of", "value": SPREAD.get("as_of", ""), "delta": None},
+    ]
+    return JSONResponse(content=data)
+
+
+@app.get("/data_sources")
+def data_sources():
+    """Markdown: where every number on the dashboard comes from."""
+    updated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    return (
+        "### Data sources\n\n"
+        "- **Equity prices, daily move, market cap** — pulled automatically from live market "
+        "data on load (cached ~10 min). Falls back to reference values if the feed is unavailable.\n"
+        f"- **Steel crack spread (HRC − prime scrap)** — HRC from {SPREAD.get('hrc_source','')}; "
+        f"scrap from {SPREAD.get('scrap_source','')}. Reference values as of {SPREAD.get('as_of','')} "
+        "(real-time steel/scrap prints are subscription-only via SMU / CRU / Platts).\n"
+        "- **Capacity & segment fundamentals** — company filings / 10-Ks (reference data, changes rarely).\n"
+        "- **Trader briefings** — analyst commentary.\n\n"
+        f"*Backend last responded: {updated}.*"
+    )

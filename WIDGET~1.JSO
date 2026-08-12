@@ -1,0 +1,111 @@
+{
+  "market_tape": {
+    "name": "Metals Coverage Tape",
+    "description": "Covered metals names with segment, market cap and capacity",
+    "category": "MetalsDesk",
+    "type": "table",
+    "endpoint": "market_tape",
+    "gridData": { "w": 40, "h": 8 },
+    "source": "MetalsDesk"
+  },
+  "company_overview": {
+    "name": "Company Overview",
+    "description": "Headline metrics for the selected company",
+    "category": "MetalsDesk",
+    "type": "metric",
+    "endpoint": "company_overview",
+    "gridData": { "w": 20, "h": 8 },
+    "source": "MetalsDesk",
+    "params": [
+      {
+        "paramName": "ticker",
+        "value": "NUE",
+        "label": "Company",
+        "type": "text",
+        "description": "Select a covered company",
+        "options": [
+          { "label": "Nucor (NUE)", "value": "NUE" },
+          { "label": "Steel Dynamics (STLD)", "value": "STLD" },
+          { "label": "Cleveland-Cliffs (CLF)", "value": "CLF" },
+          { "label": "Alcoa (AA)", "value": "AA" },
+          { "label": "Ryerson + Olympic (RYZ)", "value": "RYZ" }
+        ]
+      }
+    ]
+  },
+  "company_capacity": {
+    "name": "Capacity by Product",
+    "description": "Capacity / volume breakdown by product for the selected company",
+    "category": "MetalsDesk",
+    "type": "chart",
+    "endpoint": "company_capacity",
+    "gridData": { "w": 20, "h": 12 },
+    "source": "MetalsDesk",
+    "params": [
+      {
+        "paramName": "ticker",
+        "value": "NUE",
+        "label": "Company",
+        "type": "text",
+        "description": "Select a covered company",
+        "options": [
+          { "label": "Nucor (NUE)", "value": "NUE" },
+          { "label": "Steel Dynamics (STLD)", "value": "STLD" },
+          { "label": "Cleveland-Cliffs (CLF)", "value": "CLF" },
+          { "label": "Alcoa (AA)", "value": "AA" },
+          { "label": "Ryerson + Olympic (RYZ)", "value": "RYZ" }
+        ]
+      }
+    ]
+  },
+  "company_capacity_table": {
+    "name": "Capacity Breakdown (table)",
+    "description": "Capacity / volume breakdown by product as a table",
+    "category": "MetalsDesk",
+    "type": "table",
+    "endpoint": "company_capacity_table",
+    "gridData": { "w": 20, "h": 8 },
+    "source": "MetalsDesk",
+    "params": [
+      {
+        "paramName": "ticker",
+        "value": "NUE",
+        "label": "Company",
+        "type": "text",
+        "description": "Select a covered company",
+        "options": [
+          { "label": "Nucor (NUE)", "value": "NUE" },
+          { "label": "Steel Dynamics (STLD)", "value": "STLD" },
+          { "label": "Cleveland-Cliffs (CLF)", "value": "CLF" },
+          { "label": "Alcoa (AA)", "value": "AA" },
+          { "label": "Ryerson + Olympic (RYZ)", "value": "RYZ" }
+        ]
+      }
+    ]
+  },
+  "company_briefing": {
+    "name": "Trader Briefing",
+    "description": "The MetalsDesk trader read for the selected company",
+    "category": "MetalsDesk",
+    "type": "markdown",
+    "endpoint": "company_briefing",
+    "gridData": { "w": 20, "h": 12 },
+    "source": "MetalsDesk",
+    "params": [
+      {
+        "paramName": "ticker",
+        "value": "NUE",
+        "label": "Company",
+        "type": "text",
+        "description": "Select a covered company",
+        "options": [
+          { "label": "Nucor (NUE)", "value": "NUE" },
+          { "label": "Steel Dynamics (STLD)", "value": "STLD" },
+          { "label": "Cleveland-Cliffs (CLF)", "value": "CLF" },
+          { "label": "Alcoa (AA)", "value": "AA" },
+          { "label": "Ryerson + Olympic (RYZ)", "value": "RYZ" }
+        ]
+      }
+    ]
+  }
+}

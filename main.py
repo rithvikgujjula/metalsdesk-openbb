@@ -169,34 +169,53 @@ def _fallback_rows():
     ]
 
 
+def _stooq_quote(ticker):
+    """Fetch one quote line from Stooq (keyless, works from datacenters)."""
+    import urllib.request, csv, io
+
+    sym = ticker.lower() + ".us"
+    url = f"https://stooq.com/q/l/?s={sym}&f=sd2t2ohlcvn&h&e=csv"
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=6) as r:
+            text = r.read().decode("utf-8", "replace")
+        return next(csv.DictReader(io.StringIO(text)), None)
+    except Exception:
+        return None
+
+
 def _live_rows():
-    """Fetch live equity data. Raises on failure so the caller can fall back."""
-    import yfinance as yf  # lazy import: never breaks config/static widgets
+    """Fetch live equity closes from Stooq (concurrent). Market cap stays as
+    reference (Stooq doesn't provide it). Any ticker that fails shows reference."""
+    import concurrent.futures
+
+    quotes = {}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as ex:
+        futs = {ex.submit(_stooq_quote, t): t for t in COMPANIES}
+        for fut in concurrent.futures.as_completed(futs):
+            quotes[futs[fut]] = fut.result()
 
     rows = []
-    yt = yf.Tickers(" ".join(COMPANIES.keys()))
     for t, comp in COMPANIES.items():
-        price = daypct = mcap = None
+        q = quotes.get(t)
+        price = daypct = None
         source = "reference (filings)"
         try:
-            fi = yt.tickers[t].fast_info
-            price = getattr(fi, "last_price", None)
-            prev = getattr(fi, "previous_close", None)
-            mcap = getattr(fi, "market_cap", None)
-            if price and prev:
-                daypct = (price / prev - 1.0) * 100.0
-            if price:
-                source = "live (market data)"
+            close = float(q["Close"])
+            openp = float(q["Open"])
+            if close == close and close > 0:  # not NaN
+                price = round(close, 2)
+                if openp > 0:
+                    daypct = round((close / openp - 1.0) * 100.0, 2)
+                source = "live close (Stooq)"
         except Exception:
             pass
-        if mcap is None and comp.get("market_cap_usd_b"):
-            mcap = comp["market_cap_usd_b"] * 1e9
         rows.append(
             {
                 "Ticker": t,
-                "Price": round(price, 2) if price else None,
-                "Day %": round(daypct, 2) if daypct is not None else None,
-                "Market Cap ($B)": round(mcap / 1e9, 1) if mcap else comp.get("market_cap_usd_b"),
+                "Price": price,
+                "Day %": daypct,
+                "Market Cap ($B)": comp.get("market_cap_usd_b"),
                 "Source": source,
             }
         )
@@ -216,7 +235,7 @@ def _fetch_live_prices():
     live_ok = False
     try:
         with concurrent.futures.ThreadPoolExecutor(max_workers=1) as ex:
-            rows = ex.submit(_live_rows).result(timeout=8)
+            rows = ex.submit(_live_rows).result(timeout=10)
         live_ok = any(r["Source"].startswith("live") for r in rows)
     except Exception:
         rows = _fallback_rows()

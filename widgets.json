@@ -1,4 +1,32 @@
 {
+  "live_prices": {
+    "name": "Live Market",
+    "description": "Live equity price, daily move and market cap per covered name",
+    "category": "MetalsDesk",
+    "type": "table",
+    "endpoint": "live_prices",
+    "gridData": { "w": 25, "h": 8 },
+    "source": "MetalsDesk",
+    "refetchInterval": 600000
+  },
+  "steel_spread": {
+    "name": "Steel Crack Spread",
+    "description": "EAF metal spread: HRC hot-rolled coil minus prime scrap",
+    "category": "MetalsDesk",
+    "type": "metric",
+    "endpoint": "steel_spread",
+    "gridData": { "w": 15, "h": 8 },
+    "source": "MetalsDesk"
+  },
+  "data_sources": {
+    "name": "Data Sources",
+    "description": "Where every number on the dashboard comes from",
+    "category": "MetalsDesk",
+    "type": "markdown",
+    "endpoint": "data_sources",
+    "gridData": { "w": 40, "h": 6 },
+    "source": "MetalsDesk"
+  },
   "market_tape": {
     "name": "Metals Coverage Tape",
     "description": "Covered metals names with segment, market cap and capacity",

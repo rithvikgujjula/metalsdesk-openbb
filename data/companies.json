@@ -1,0 +1,114 @@
+{
+  "_meta": {
+    "note": "Figures are approximate anchors gathered Aug 2026 for demo purposes. Replace values here with your MetalsDesk research; every widget reads from this file, so you only edit data in one place.",
+    "as_of": "2026-08-12"
+  },
+  "companies": {
+    "NUE": {
+      "name": "Nucor Corporation",
+      "ticker": "NUE",
+      "segment": "Steel — Electric Arc Furnace (EAF)",
+      "hq": "Charlotte, NC",
+      "market_cap_usd_b": 40.0,
+      "capacity_mt": 27.0,
+      "metrics": [
+        { "label": "Market Cap", "value": "$40.0B", "delta": null },
+        { "label": "Steel Capacity", "value": "~27 Mt/yr", "delta": null },
+        { "label": "HRC List Price", "value": "$960/ton", "delta": "3.2" },
+        { "label": "Share of US Capacity", "value": "~25–30%", "delta": null },
+        { "label": "Furnace Type", "value": "EAF (scrap)", "delta": null }
+      ],
+      "capacity_breakdown": [
+        { "product": "Sheet", "capacity_mt": 11.0 },
+        { "product": "Bar", "capacity_mt": 8.0 },
+        { "product": "Structural", "capacity_mt": 4.5 },
+        { "product": "Plate", "capacity_mt": 3.5 }
+      ],
+      "briefing": "### Nucor (NUE) — trader read\n\n- **Largest US steelmaker**, ~25–30% of domestic capacity, all electric-arc-furnace (scrap-fed) — low fixed cost, flexes with demand.\n- **HRC list at $960/ton**, raised on tariff support; EAF margins geared to scrap spread.\n- **Diversified mix**: sheet, bar, structural, plate — less cyclical than a pure flat-rolled name.\n- **Watch**: scrap prices, non-residential construction, tariff headlines."
+    },
+    "STLD": {
+      "name": "Steel Dynamics, Inc.",
+      "ticker": "STLD",
+      "segment": "Steel — Electric Arc Furnace (EAF)",
+      "hq": "Fort Wayne, IN",
+      "market_cap_usd_b": 25.6,
+      "capacity_mt": 13.0,
+      "metrics": [
+        { "label": "Market Cap", "value": "$25.6B", "delta": null },
+        { "label": "Steel Capacity", "value": "~13 Mt/yr", "delta": null },
+        { "label": "US Rank (carbon steel)", "value": "#3", "delta": null },
+        { "label": "Furnace Type", "value": "EAF (scrap)", "delta": null },
+        { "label": "EV/EBITDA 2026E", "value": "~8.0x", "delta": null }
+      ],
+      "capacity_breakdown": [
+        { "product": "Flat Roll", "capacity_mt": 8.4 },
+        { "product": "Long Products", "capacity_mt": 2.8 },
+        { "product": "Sinton (new mill)", "capacity_mt": 1.8 }
+      ],
+      "briefing": "### Steel Dynamics (STLD) — trader read\n\n- **#3 US carbon steel producer**, ~13 Mt capacity, EAF like Nucor.\n- **Sinton mill** ramping adds flat-roll supply in the South.\n- **Also a large metals recycler** (OmniSource) — vertically integrated into scrap.\n- **Watch**: Sinton utilization, scrap spread, fabrication backlog."
+    },
+    "CLF": {
+      "name": "Cleveland-Cliffs Inc.",
+      "ticker": "CLF",
+      "segment": "Steel — Integrated (BF/BOF)",
+      "hq": "Cleveland, OH",
+      "market_cap_usd_b": 8.1,
+      "capacity_mt": 26.0,
+      "metrics": [
+        { "label": "Market Cap", "value": "$8.1B", "delta": null },
+        { "label": "Steel Capacity", "value": "~26 Mt/yr", "delta": null },
+        { "label": "Furnace Type", "value": "Integrated BF/BOF", "delta": null },
+        { "label": "EV/EBITDA 2026E", "value": "~6.5x", "delta": null },
+        { "label": "End Market", "value": "Auto-heavy", "delta": null }
+      ],
+      "capacity_breakdown": [
+        { "product": "Flat-Rolled (auto)", "capacity_mt": 16.0 },
+        { "product": "Plate", "capacity_mt": 3.0 },
+        { "product": "Stainless/Electrical", "capacity_mt": 3.0 },
+        { "product": "Other / Slabs", "capacity_mt": 4.0 }
+      ],
+      "briefing": "### Cleveland-Cliffs (CLF) — trader read\n\n- **Largest flat-rolled producer for autos**, integrated blast-furnace shop — higher fixed cost, more operating leverage than EAF peers.\n- **Trades cheaper (~6.5x)** on debt load and limited diversification.\n- **Iron ore self-sufficient** — owns its raw material chain.\n- **Watch**: auto build rates, iron ore, debt maturities, M&A chatter (US Steel history)."
+    },
+    "AA": {
+      "name": "Alcoa Corporation",
+      "ticker": "AA",
+      "segment": "Aluminum — Integrated (bauxite → alumina → primary)",
+      "hq": "Pittsburgh, PA",
+      "market_cap_usd_b": 14.3,
+      "capacity_mt": 2.3,
+      "metrics": [
+        { "label": "Market Cap", "value": "$14.3B", "delta": null },
+        { "label": "Primary Aluminum Capacity", "value": "~2.3 Mt/yr", "delta": null },
+        { "label": "Value Chain", "value": "Bauxite → Alumina → Metal", "delta": null },
+        { "label": "Commodity", "value": "Aluminum (LME)", "delta": null }
+      ],
+      "capacity_breakdown": [
+        { "product": "Primary Aluminum", "capacity_mt": 2.3 },
+        { "product": "Alumina (refining)", "capacity_mt": 9.5 },
+        { "product": "Bauxite (mining)", "capacity_mt": 42.0 }
+      ],
+      "briefing": "### Alcoa (AA) — trader read\n\n- **Vertically integrated aluminum**: bauxite mining, alumina refining, primary metal — the only pure-play US name of scale.\n- **Leveraged to LME aluminum and alumina (API) prices**; energy cost is the swing factor at smelters.\n- **Note**: capacity here is in different units per stage (metal vs. refining vs. mining) — not comparable to steel tons.\n- **Watch**: LME aluminum, alumina spot, power contracts, tariffs on imported metal."
+    },
+    "RYZ": {
+      "name": "Ryerson Holding Corporation (incl. Olympic Steel)",
+      "ticker": "RYZ",
+      "segment": "Metals Service Center & Distribution",
+      "hq": "Chicago, IL",
+      "market_cap_usd_b": 1.37,
+      "capacity_mt": null,
+      "metrics": [
+        { "label": "Market Cap", "value": "$1.37B", "delta": null },
+        { "label": "Q1'26 Revenue YoY", "value": "+30%", "delta": "30.0" },
+        { "label": "Business", "value": "Service center / distributor", "delta": null },
+        { "label": "Recent Event", "value": "Olympic Steel merger (Feb '26)", "delta": null }
+      ],
+      "capacity_breakdown": [
+        { "product": "Carbon Steel", "capacity_mt": 0 },
+        { "product": "Stainless", "capacity_mt": 0 },
+        { "product": "Aluminum", "capacity_mt": 0 },
+        { "product": "Alloy", "capacity_mt": 0 }
+      ],
+      "briefing": "### Ryerson + Olympic Steel (RYZ) — trader read\n\n- **Metals service center / distributor**, not a producer — buys, processes, and resells stainless, aluminum, carbon and alloy.\n- **Merged with Olympic Steel (Feb 2026)**; Q1'26 revenue up >30% YoY on the combined volumes.\n- **Margins are spread + volume**, not commodity price direction — different beast from the mills above.\n- **Watch**: service-center spreads, integration/synergies, industrial demand.\n- *Capacity is not a meaningful metric for a distributor — shown as volume/spread instead.*"
+    }
+  }
+}

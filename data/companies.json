@@ -3,6 +3,15 @@
     "note": "Figures are approximate anchors gathered Aug 2026 for demo purposes. Replace values here with your MetalsDesk research; every widget reads from this file, so you only edit data in one place.",
     "as_of": "2026-08-12"
   },
+  "steel_spread": {
+    "hrc_price": 960,
+    "scrap_price": 430,
+    "unit": "$/ton",
+    "hrc_source": "US Midwest HRC (CME / Steel Market Update)",
+    "scrap_source": "Prime busheling scrap (Steel Market Update)",
+    "as_of": "2026-08-12",
+    "note": "EAF metal spread = HRC selling price minus prime scrap input. Update these two numbers to refresh the spread."
+  },
   "companies": {
     "NUE": {
       "name": "Nucor Corporation",

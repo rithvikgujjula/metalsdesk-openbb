@@ -88,13 +88,13 @@
             "x": 20,
             "y": 35,
             "w": 20,
-            "h": 12,
+            "h": 20,
             "state": { "params": { "ticker": "NUE" } }
           },
           {
             "i": "data_sources",
             "x": 0,
-            "y": 47,
+            "y": 55,
             "w": 40,
             "h": 6,
             "state": { "params": {} }

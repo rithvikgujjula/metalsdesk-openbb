@@ -36,7 +36,7 @@
         { "product": "Structural", "capacity_mt": 4.5 },
         { "product": "Plate", "capacity_mt": 3.5 }
       ],
-      "briefing": "### Nucor (NUE): what matters\n\nThe largest scrap consumer in North America, so its melt rate is a direct read on prime scrap demand. Nucor posts a weekly consumer spot price for HRC that the rest of the sheet market prices off, so the Monday CSP move sets the tone.\n\n**Assets and supply:** sheet, bar, structural and plate mills across the US, plus a large new sheet mill ramping in West Virginia that adds flat roll into the East. More Nucor tons means more busheling pulled from the market.\n\n**Catalysts:** weekly HRC price changes, Section 232 tariff headlines, scrap generation and obsolete flows, non residential construction and data center demand."
+      "briefing": "### Nucor (NUE): what matters\n\nThe largest scrap consumer in North America, so its melt rate is a direct read on prime scrap demand. Nucor posts a weekly consumer spot price for HRC that the rest of the sheet market prices off, so the Monday CSP move sets the tone. A large new sheet mill is ramping in West Virginia, adding flat roll into the East.\n\n**Catalysts:** weekly HRC price changes, Section 232 tariff headlines, scrap generation and obsolete flows, non residential construction and data center demand.\n\n### Key assets\n\n| Facility | Location | Type |\n| --- | --- | --- |\n| Berkeley | Huger, SC | Sheet |\n| Crawfordsville | Indiana | Sheet |\n| Decatur | Alabama | Sheet |\n| Hickman | Arkansas | Sheet |\n| Gallatin | Ghent, KY | Sheet |\n| West Virginia | Mason County, WV | Sheet (ramping) |\n| Nucor-Yamato | Blytheville, AR | Structural, beams |\n| Brandenburg | Kentucky | Plate |\n| Hertford, Tuscaloosa | NC, AL | Plate |\n| Bar mills | NE, UT, TX, SC, IL, WA | Bar |\n| Louisiana DRI | St. James, LA | Metallics (DRI) |"
     },
     "STLD": {
       "name": "Steel Dynamics, Inc.",
@@ -57,7 +57,7 @@
         { "product": "Long Products", "capacity_mt": 2.8 },
         { "product": "Sinton (new mill)", "capacity_mt": 1.8 }
       ],
-      "briefing": "### Steel Dynamics (STLD): what matters\n\nScrap fed sheet and long products, and one of the largest metals recyclers through OmniSource, so it sits on both sides of the ferrous trade.\n\n**Assets and supply:** the Sinton, Texas flat roll mill is the swing tonnage, ramping toward full run rate and pushing sheet into the South and Mexico. A new aluminum flat rolled mill in Mississippi opens a second commodity exposure.\n\n**Catalysts:** Sinton utilization and yield, the scrap spread, Southern and Mexican demand, the aluminum ramp timeline."
+      "briefing": "### Steel Dynamics (STLD): what matters\n\nScrap fed sheet and long products, and one of the largest metals recyclers through OmniSource, so it sits on both sides of the ferrous trade. Sinton is the swing tonnage as it ramps toward full run rate, and a new aluminum mill opens a second commodity exposure.\n\n**Catalysts:** Sinton utilization and yield, the scrap spread, Southern and Mexican demand, the aluminum ramp timeline.\n\n### Key assets\n\n| Facility | Location | Type |\n| --- | --- | --- |\n| Butler | Indiana | Flat roll (EAF) |\n| Columbus | Mississippi | Flat roll (EAF) |\n| Sinton | Texas | Flat roll (EAF, ramping) |\n| Structural & Rail | Columbia City, IN | Beams, rail |\n| Engineered Bar | Pittsboro, IN | SBQ bar |\n| Roanoke, Steel of WV | VA, WV | Long products |\n| OmniSource | National | Scrap recycling |\n| Aluminum Dynamics | Columbus, MS | Aluminum flat roll (new) |"
     },
     "CLF": {
       "name": "Cleveland-Cliffs Inc.",
@@ -79,7 +79,7 @@
         { "product": "Stainless/Electrical", "capacity_mt": 3.0 },
         { "product": "Other / Slabs", "capacity_mt": 4.0 }
       ],
-      "briefing": "### Cleveland-Cliffs (CLF): what matters\n\nThe integrated flat roll supplier to Detroit, running blast furnaces and self supplying iron ore, so it drives ore and coking coal demand rather than scrap. Runs an HBI plant in Toledo for metallics.\n\n**Assets and supply:** heavy exposure to auto contract tonnage, plus the Stelco acquisition adding Canadian capacity. Blast furnace idles and restarts are the supply signal to watch, since each moves a lot of tonnage at once.\n\n**Catalysts:** auto build rates and contract talks, iron ore and coke, furnace idles or restarts, flat roll imports."
+      "briefing": "### Cleveland-Cliffs (CLF): what matters\n\nThe integrated flat roll supplier to Detroit, running blast furnaces and self supplying iron ore, so it drives ore and coking coal demand rather than scrap. Blast furnace idles and restarts are the supply signal to watch, since each moves a lot of tonnage at once. The Stelco deal added Canadian capacity.\n\n**Catalysts:** auto build rates and contract talks, iron ore and coke, furnace idles or restarts, flat roll imports.\n\n### Key assets\n\n| Facility | Location | Type |\n| --- | --- | --- |\n| Indiana Harbor | East Chicago, IN | Integrated (largest) |\n| Burns Harbor | Indiana | Integrated |\n| Cleveland Works | Cleveland, OH | Integrated |\n| Middletown | Ohio | Integrated |\n| Dearborn | Michigan | Integrated |\n| Stelco, Lake Erie | Nanticoke, ON | Integrated (Canada) |\n| Toledo HBI | Ohio | Metallics (HBI) |\n| Iron ore pellets | Minnesota, Michigan | Raw material (~29 Mt) |\n| Coshocton, Zanesville | Ohio | Stainless, electrical |"
     },
     "AA": {
       "name": "Alcoa Corporation",
@@ -99,7 +99,7 @@
         { "product": "Alumina (refining)", "capacity_mt": 9.5 },
         { "product": "Bauxite (mining)", "capacity_mt": 42.0 }
       ],
-      "briefing": "### Alcoa (AA): what matters\n\nUpstream aluminum, not steel. Mines bauxite, refines alumina and smelts primary metal, so the read is LME aluminum, the alumina index and smelter power costs.\n\n**Assets and supply:** global smelters and refineries, with restarts such as San Ciprian and any curtailments as the supply story. Power contracts and energy prices set the marginal cost.\n\n**Catalysts:** LME aluminum and the Midwest premium, alumina prices, tariffs on Canadian and imported metal, smelter curtailments or restarts."
+      "briefing": "### Alcoa (AA): what matters\n\nUpstream aluminum, not steel. Mines bauxite, refines alumina and smelts primary metal, so the read is LME aluminum, the alumina index and smelter power costs. Restarts such as San Ciprian and any curtailments are the supply story, and power contracts set the marginal cost.\n\n**Catalysts:** LME aluminum and the Midwest premium, alumina prices, tariffs on Canadian and imported metal, smelter curtailments or restarts.\n\n### Key assets\n\n| Facility | Location | Type |\n| --- | --- | --- |\n| Smelters (US) | Warrick IN, Massena NY | Primary aluminum |\n| Smelters (Canada) | Becancour, Baie-Comeau, Deschambault QC | Primary aluminum |\n| Smelters (intl) | Iceland, Norway, Spain, Australia, Brazil | Primary aluminum |\n| Refineries | Australia, Brazil, Spain | Alumina |\n| Bauxite mines | Australia, Brazil, Guinea | Bauxite |"
     },
     "RYZ": {
       "name": "Ryerson Holding Corporation (incl. Olympic Steel)",
@@ -120,7 +120,7 @@
         { "product": "Aluminum", "capacity_mt": 0 },
         { "product": "Alloy", "capacity_mt": 0 }
       ],
-      "briefing": "### Ryerson plus Olympic Steel (RYZ): what matters\n\nA service center and distributor, so it earns the spread between mill buy price and resale plus processing, not flat price direction. A useful read on physical demand and lead times on the ground.\n\n**Assets and supply:** a national network of service centers across stainless, aluminum, carbon and alloy, expanded by the Olympic Steel merger that closed early 2026.\n\n**Catalysts:** service center spreads, mill lead times and restocking, integration synergies, industrial and OEM demand."
+      "briefing": "### Ryerson plus Olympic Steel (RYZ): what matters\n\nA service center and distributor, so it earns the spread between mill buy price and resale plus processing, not flat price direction. A useful read on physical demand and lead times on the ground, expanded by the Olympic Steel merger that closed early 2026.\n\n**Catalysts:** service center spreads, mill lead times and restocking, integration synergies, industrial and OEM demand.\n\n### Key assets\n\n| Facility | Location | Type |\n| --- | --- | --- |\n| Service centers | ~110 across US, Canada, Mexico | Distribution, processing |\n| Product lines | Carbon, stainless, aluminum, alloy | Metals distribution |\n| Central Steel & Wire | Chicago, IL | Distribution |\n| Olympic Steel | National (merged 2026) | Coil, plate, pipe & tube |"
     }
   }
 }

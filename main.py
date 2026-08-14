@@ -321,14 +321,60 @@ def _bar_fig(x, y, colors, title, ytitle):
     }
 
 
-@app.get("/movers_chart")
-def movers_chart():
-    """Plotly bar: today's % move per covered name (green up, red down)."""
-    rows = _fetch_live_prices()
-    x = [r["Ticker"] for r in rows]
-    y = [r["Day %"] if r["Day %"] is not None else 0 for r in rows]
-    colors = ["#1D9E75" if v >= 0 else "#D85A30" for v in y]
-    return JSONResponse(content=_bar_fig(x, y, colors, "Daily movers (% change)", "Day %"))
+@app.get("/capacity_map_chart")
+def capacity_map_chart():
+    """Plotly grouped bar: steelmaking/aluminum capacity (Mt/yr) per name,
+    colored by furnace type. Shows who pulls scrap vs iron ore vs alumina."""
+    type_color = {
+        "EAF (scrap)": "#1D9E75",
+        "Integrated (iron ore)": "#378ADD",
+        "Aluminum (alumina)": "#888780",
+    }
+
+    def furnace_type(seg):
+        if "EAF" in seg:
+            return "EAF (scrap)"
+        if "Integrated (BF" in seg:
+            return "Integrated (iron ore)"
+        if "Aluminum" in seg:
+            return "Aluminum (alumina)"
+        return None
+
+    grouped = {}
+    for t, c in COMPANIES.items():
+        cap = c.get("capacity_mt")
+        ft = furnace_type(c.get("segment", ""))
+        if not cap or not ft:
+            continue
+        grouped.setdefault(ft, {"x": [], "y": []})
+        grouped[ft]["x"].append(t)
+        grouped[ft]["y"].append(cap)
+
+    traces = [
+        {
+            "type": "bar",
+            "name": ft,
+            "x": d["x"],
+            "y": d["y"],
+            "marker": {"color": type_color.get(ft, "#888780")},
+            "hovertemplate": "%{x}: %{y} Mt/yr<extra>" + ft + "</extra>",
+        }
+        for ft, d in grouped.items()
+    ]
+    fig = {
+        "data": traces,
+        "layout": {
+            "title": {"text": "Capacity by company & furnace type (Mt/yr)"},
+            "template": "plotly_dark",
+            "barmode": "group",
+            "margin": {"l": 45, "r": 20, "t": 40, "b": 40},
+            "paper_bgcolor": "rgba(0,0,0,0)",
+            "plot_bgcolor": "rgba(0,0,0,0)",
+            "yaxis": {"title": "Mt/yr"},
+            "legend": {"orientation": "h", "y": -0.15},
+        },
+    }
+    return JSONResponse(content=fig)
 
 
 @app.get("/marketcap_chart")

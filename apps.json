@@ -36,7 +36,7 @@
             "state": { "params": {} }
           },
           {
-            "i": "movers_chart",
+            "i": "capacity_map_chart",
             "x": 0,
             "y": 18,
             "w": 13,

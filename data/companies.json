@@ -13,13 +13,13 @@
     "scrap_source": "RMDAS/MSA prime busheling (US)",
     "scrap_as_of": "Aug 2026 buy month",
     "gross_to_short": 1.12,
-    "note": "US EAF metal spread = HRC minus prime busheling scrap - the margin that drives Nucor and Steel Dynamics. HRC in $/short ton (SMU, published weekly); scrap in $/gross ton (RMDAS, settles monthly). Spread shown in $/short ton with scrap converted at 1 gross ton = 1.12 short tons. Benchmark data on weekly/monthly cadence, not a live tick. Update HRC weekly and scrap monthly from the cited sources."
+    "note": "US EAF metal spread equals HRC minus prime busheling scrap, the margin that drives Nucor and Steel Dynamics. HRC in $/short ton (SMU, published weekly); scrap in $/gross ton (RMDAS, settles monthly). Spread shown in $/short ton with scrap converted at 1 gross ton to 1.12 short tons. Benchmark data on weekly/monthly cadence, not a live tick. Update HRC weekly and scrap monthly from the cited sources."
   },
   "companies": {
     "NUE": {
       "name": "Nucor Corporation",
       "ticker": "NUE",
-      "segment": "Steel — Electric Arc Furnace (EAF)",
+      "segment": "Steel, Electric Arc Furnace (EAF)",
       "hq": "Charlotte, NC",
       "market_cap_usd_b": 40.0,
       "capacity_mt": 27.0,
@@ -27,7 +27,7 @@
         { "label": "Market Cap", "value": "$40.0B", "delta": null },
         { "label": "Steel Capacity", "value": "~27 Mt/yr", "delta": null },
         { "label": "HRC Spot Price", "value": "$1,145/st", "delta": "0.9" },
-        { "label": "Share of US Capacity", "value": "~25–30%", "delta": null },
+        { "label": "Share of US Capacity", "value": "25 to 30%", "delta": null },
         { "label": "Furnace Type", "value": "EAF (scrap)", "delta": null }
       ],
       "capacity_breakdown": [
@@ -36,19 +36,19 @@
         { "product": "Structural", "capacity_mt": 4.5 },
         { "product": "Plate", "capacity_mt": 3.5 }
       ],
-      "briefing": "### Nucor (NUE) — trader read\n\n- **Largest US steelmaker**, ~25–30% of domestic capacity, all electric-arc-furnace (scrap-fed) — low fixed cost, flexes with demand.\n- **HRC spot ~$1,145/st**, raised on Section 232 tariff support; EAF margins geared to scrap spread.\n- **Diversified mix**: sheet, bar, structural, plate — less cyclical than a pure flat-rolled name.\n- **Watch**: scrap prices, non-residential construction, tariff headlines."
+      "briefing": "### Nucor (NUE): trader read\n\nThe bellwether. Largest US steelmaker at roughly 25 to 30 percent of domestic capacity, all electric arc furnace, so the cost base flexes with scrap instead of sitting in fixed blast furnace overhead. Nucor sets the HRC spot price the rest of the market follows.\n\nThe swing factor is the metal spread: HRC selling price minus busheling scrap. When it widens, Nucor prints. Diversified across sheet, bar, structural and plate, which smooths the cycle versus a pure flat rolled name.\n\n**Watch:** scrap costs, non residential construction, tariff headlines."
     },
     "STLD": {
       "name": "Steel Dynamics, Inc.",
       "ticker": "STLD",
-      "segment": "Steel — Electric Arc Furnace (EAF)",
+      "segment": "Steel, Electric Arc Furnace (EAF)",
       "hq": "Fort Wayne, IN",
       "market_cap_usd_b": 25.6,
       "capacity_mt": 13.0,
       "metrics": [
         { "label": "Market Cap", "value": "$25.6B", "delta": null },
         { "label": "Steel Capacity", "value": "~13 Mt/yr", "delta": null },
-        { "label": "US Rank (carbon steel)", "value": "#3", "delta": null },
+        { "label": "US Rank (carbon steel)", "value": "No. 3", "delta": null },
         { "label": "Furnace Type", "value": "EAF (scrap)", "delta": null },
         { "label": "EV/EBITDA 2026E", "value": "~8.0x", "delta": null }
       ],
@@ -57,12 +57,12 @@
         { "product": "Long Products", "capacity_mt": 2.8 },
         { "product": "Sinton (new mill)", "capacity_mt": 1.8 }
       ],
-      "briefing": "### Steel Dynamics (STLD) — trader read\n\n- **#3 US carbon steel producer**, ~13 Mt capacity, EAF like Nucor.\n- **Sinton mill** ramping adds flat-roll supply in the South.\n- **Also a large metals recycler** (OmniSource) — vertically integrated into scrap.\n- **Watch**: Sinton utilization, scrap spread, fabrication backlog."
+      "briefing": "### Steel Dynamics (STLD): trader read\n\nThe growth EAF. Number three US carbon steel producer, same scrap fed model as Nucor with a lower cost reputation. The Sinton, Texas mill is the story: as it ramps it adds flat roll supply into the South and lifts volumes.\n\nVertically integrated into scrap through OmniSource, which hedges the input side. Moves in step with Nucor on the same spread and tariff drivers.\n\n**Watch:** Sinton utilization, the scrap spread, fabrication backlog."
     },
     "CLF": {
       "name": "Cleveland-Cliffs Inc.",
       "ticker": "CLF",
-      "segment": "Steel — Integrated (BF/BOF)",
+      "segment": "Steel, Integrated (BF/BOF)",
       "hq": "Cleveland, OH",
       "market_cap_usd_b": 8.1,
       "capacity_mt": 26.0,
@@ -71,7 +71,7 @@
         { "label": "Steel Capacity", "value": "~26 Mt/yr", "delta": null },
         { "label": "Furnace Type", "value": "Integrated BF/BOF", "delta": null },
         { "label": "EV/EBITDA 2026E", "value": "~6.5x", "delta": null },
-        { "label": "End Market", "value": "Auto-heavy", "delta": null }
+        { "label": "End Market", "value": "Auto heavy", "delta": null }
       ],
       "capacity_breakdown": [
         { "product": "Flat-Rolled (auto)", "capacity_mt": 16.0 },
@@ -79,19 +79,19 @@
         { "product": "Stainless/Electrical", "capacity_mt": 3.0 },
         { "product": "Other / Slabs", "capacity_mt": 4.0 }
       ],
-      "briefing": "### Cleveland-Cliffs (CLF) — trader read\n\n- **Largest flat-rolled producer for autos**, integrated blast-furnace shop — higher fixed cost, more operating leverage than EAF peers.\n- **Trades cheaper (~6.5x)** on debt load and limited diversification.\n- **Iron ore self-sufficient** — owns its raw material chain.\n- **Watch**: auto build rates, iron ore, debt maturities, M&A chatter (US Steel history)."
+      "briefing": "### Cleveland-Cliffs (CLF): trader read\n\nThe high beta integrated play. Largest flat rolled supplier to US autos, running blast furnaces rather than EAFs, so it carries more fixed cost and more operating leverage. It screams higher when steel rallies and hurts when it fades.\n\nOwns its own iron ore, so raw material is internal but capex is heavy. Trades at a cheaper multiple than the EAF names on debt load and thinner diversification.\n\n**Watch:** auto build rates, iron ore, debt maturities, recurring M&A chatter."
     },
     "AA": {
       "name": "Alcoa Corporation",
       "ticker": "AA",
-      "segment": "Aluminum — Integrated (bauxite → alumina → primary)",
+      "segment": "Aluminum, Integrated (bauxite to metal)",
       "hq": "Pittsburgh, PA",
       "market_cap_usd_b": 14.3,
       "capacity_mt": 2.3,
       "metrics": [
         { "label": "Market Cap", "value": "$14.3B", "delta": null },
         { "label": "Primary Aluminum Capacity", "value": "~2.3 Mt/yr", "delta": null },
-        { "label": "Value Chain", "value": "Bauxite → Alumina → Metal", "delta": null },
+        { "label": "Value Chain", "value": "Bauxite to Metal", "delta": null },
         { "label": "Commodity", "value": "Aluminum (LME)", "delta": null }
       ],
       "capacity_breakdown": [
@@ -99,7 +99,7 @@
         { "product": "Alumina (refining)", "capacity_mt": 9.5 },
         { "product": "Bauxite (mining)", "capacity_mt": 42.0 }
       ],
-      "briefing": "### Alcoa (AA) — trader read\n\n- **Vertically integrated aluminum**: bauxite mining, alumina refining, primary metal — the only pure-play US name of scale.\n- **Leveraged to LME aluminum and alumina (API) prices**; energy cost is the swing factor at smelters.\n- **Note**: capacity here is in different units per stage (metal vs. refining vs. mining) — not comparable to steel tons.\n- **Watch**: LME aluminum, alumina spot, power contracts, tariffs on imported metal."
+      "briefing": "### Alcoa (AA): trader read\n\nThe aluminum pure play, a different animal from the steel names. Vertically integrated from bauxite mining through alumina refining to primary metal, so the P&L tracks the LME aluminum price and alumina spot, with smelter power costs as the real swing factor.\n\nThis is not a steel spread story at all. Different commodity, different driver.\n\n**Watch:** LME aluminum, alumina prices, energy contracts, import tariffs."
     },
     "RYZ": {
       "name": "Ryerson Holding Corporation (incl. Olympic Steel)",
@@ -112,7 +112,7 @@
         { "label": "Market Cap", "value": "$1.37B", "delta": null },
         { "label": "Q1'26 Revenue YoY", "value": "+30%", "delta": "30.0" },
         { "label": "Business", "value": "Service center / distributor", "delta": null },
-        { "label": "Recent Event", "value": "Olympic Steel merger (Feb '26)", "delta": null }
+        { "label": "Recent Event", "value": "Olympic Steel merger (Feb 2026)", "delta": null }
       ],
       "capacity_breakdown": [
         { "product": "Carbon Steel", "capacity_mt": 0 },
@@ -120,7 +120,7 @@
         { "product": "Aluminum", "capacity_mt": 0 },
         { "product": "Alloy", "capacity_mt": 0 }
       ],
-      "briefing": "### Ryerson + Olympic Steel (RYZ) — trader read\n\n- **Metals service center / distributor**, not a producer — buys, processes, and resells stainless, aluminum, carbon and alloy.\n- **Merged with Olympic Steel (Feb 2026)**; Q1'26 revenue up >30% YoY on the combined volumes.\n- **Margins are spread + volume**, not commodity price direction — different beast from the mills above.\n- **Watch**: service-center spreads, integration/synergies, industrial demand.\n- *Capacity is not a meaningful metric for a distributor — shown as volume/spread instead.*"
+      "briefing": "### Ryerson plus Olympic Steel (RYZ): trader read\n\nThe distributor, not a producer. Buys, processes and resells stainless, aluminum, carbon and alloy, so it earns on spread and volume rather than the direction of any one metal.\n\nThe Olympic Steel merger closed early 2026 and lifted revenue more than 30 percent year on year on the combined book. Margins live and die on service center spreads and integration synergies.\n\n**Watch:** service center spreads, synergy delivery, industrial demand. Capacity is not a meaningful metric for a distributor."
     }
   }
 }

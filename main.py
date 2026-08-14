@@ -1,5 +1,5 @@
 """
-MetalsDesk — OpenBB Workspace custom backend
+MetalsDesk: OpenBB Workspace custom backend
 =============================================
 A FastAPI backend that serves a metals-trader briefing as native OpenBB widgets.
 
@@ -11,7 +11,7 @@ Then in OpenBB Workspace: right-click a dashboard -> "Add data" -> enter
     http://localhost:7779
 The "MetalsDesk" app and its widgets will appear.
 
-All company data lives in data/companies.json — edit that file to update the
+All company data lives in data/companies.json. Edit that file to update the
 briefing; every widget reads from it.
 """
 
@@ -125,7 +125,7 @@ def company_capacity(ticker: str = "NUE"):
             }
         ],
         "layout": {
-            "title": {"text": f"{c['ticker']} — capacity by product (Mt/yr)"},
+            "title": {"text": f"{c['ticker']} capacity by product (Mt/yr)"},
             "template": "plotly_dark",
             "margin": {"l": 40, "r": 20, "t": 40, "b": 40},
             "paper_bgcolor": "rgba(0,0,0,0)",
@@ -157,7 +157,7 @@ def company_briefing(ticker: str = "NUE"):
 # Automated / live data
 # ---------------------------------------------------------------------------
 def _fallback_rows():
-    """Reference values from companies.json — always available, never blocks."""
+    """Reference values from companies.json, always available, never blocks."""
     return [
         {
             "Ticker": t,
@@ -262,7 +262,7 @@ def live_prices():
 
 @app.get("/steel_spread")
 def steel_spread():
-    """Metric: US EAF metal spread — HRC (SMU, $/short ton) minus prime
+    """Metric: US EAF metal spread, HRC (SMU, $/short ton) minus prime
     busheling scrap (RMDAS, $/gross ton), spread expressed in $/short ton."""
     hrc = SPREAD.get("hrc_price")
     scrap = SPREAD.get("scrap_price")
@@ -271,12 +271,12 @@ def steel_spread():
     if hrc is not None and scrap is not None:
         spread = round(hrc - (scrap / g2s))  # convert scrap $/gross ton -> $/short ton
     data = [
-        {"label": "HRC — SMU ($/short ton)", "value": f"${hrc:,}", "delta": None},
-        {"label": "Busheling — RMDAS ($/gross ton)", "value": f"${scrap:,}", "delta": None},
+        {"label": "HRC (SMU, $/short ton)", "value": f"${hrc:,}", "delta": None},
+        {"label": "Busheling (RMDAS, $/gross ton)", "value": f"${scrap:,}", "delta": None},
         {"label": "EAF metal spread ($/short ton)", "value": f"${spread:,}" if spread is not None else "n/a", "delta": None},
         {"label": "HRC as of", "value": SPREAD.get("hrc_as_of", ""), "delta": None},
         {"label": "Scrap as of", "value": SPREAD.get("scrap_as_of", ""), "delta": None},
-        {"label": "Basis", "value": "Benchmark · SMU weekly / RMDAS monthly", "delta": None},
+        {"label": "Basis", "value": "Benchmark: SMU weekly, RMDAS monthly", "delta": None},
     ]
     return JSONResponse(content=data)
 
@@ -287,13 +287,71 @@ def data_sources():
     updated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     return (
         "### Data sources\n\n"
-        "- **Equity prices, daily move, market cap** — pulled automatically from live market "
+        "- **Equity prices, daily move, market cap:** pulled automatically from live market "
         "data (Finnhub) on load, cached ~10 min. Falls back to reference values if the feed is unavailable.\n"
-        f"- **US EAF steel spread (HRC − busheling scrap)** — HRC from {SPREAD.get('hrc_source','')} "
+        f"- **US EAF steel spread (HRC minus busheling scrap):** HRC from {SPREAD.get('hrc_source','')} "
         f"(as of {SPREAD.get('hrc_as_of','')}); scrap from {SPREAD.get('scrap_source','')} "
-        f"(as of {SPREAD.get('scrap_as_of','')}). Published benchmarks on a weekly (HRC) / monthly (scrap) "
-        "cadence — not a live tick. Real-time prints are subscription-only via SMU / CRU / Fastmarkets.\n"
-        "- **Capacity & segment fundamentals** — company filings / 10-Ks (reference data, changes rarely).\n"
-        "- **Trader briefings** — analyst commentary.\n\n"
+        f"(as of {SPREAD.get('scrap_as_of','')}). Published benchmarks on a weekly (HRC) and monthly (scrap) "
+        "cadence, not a live tick. Real time prints are subscription only via SMU, CRU, Fastmarkets.\n"
+        "- **Capacity and segment fundamentals:** company filings and 10-Ks (reference data, changes rarely).\n"
+        "- **Trader briefings:** analyst commentary.\n\n"
         f"*Backend last responded: {updated}.*"
     )
+
+
+def _bar_fig(x, y, colors, title, ytitle):
+    return {
+        "data": [
+            {
+                "type": "bar",
+                "x": x,
+                "y": y,
+                "marker": {"color": colors},
+                "hovertemplate": "%{x}: %{y}<extra></extra>",
+            }
+        ],
+        "layout": {
+            "title": {"text": title},
+            "template": "plotly_dark",
+            "margin": {"l": 45, "r": 20, "t": 40, "b": 40},
+            "paper_bgcolor": "rgba(0,0,0,0)",
+            "plot_bgcolor": "rgba(0,0,0,0)",
+            "yaxis": {"title": ytitle},
+        },
+    }
+
+
+@app.get("/movers_chart")
+def movers_chart():
+    """Plotly bar: today's % move per covered name (green up, red down)."""
+    rows = _fetch_live_prices()
+    x = [r["Ticker"] for r in rows]
+    y = [r["Day %"] if r["Day %"] is not None else 0 for r in rows]
+    colors = ["#1D9E75" if v >= 0 else "#D85A30" for v in y]
+    return JSONResponse(content=_bar_fig(x, y, colors, "Daily movers (% change)", "Day %"))
+
+
+@app.get("/marketcap_chart")
+def marketcap_chart():
+    """Plotly bar: market cap ($B) across covered names, largest first."""
+    items = sorted(
+        COMPANIES.items(), key=lambda kv: kv[1].get("market_cap_usd_b") or 0, reverse=True
+    )
+    x = [t for t, _ in items]
+    y = [c.get("market_cap_usd_b") for _, c in items]
+    colors = ["#378ADD"] * len(x)
+    return JSONResponse(content=_bar_fig(x, y, colors, "Market cap ($B)", "$B"))
+
+
+@app.get("/spread_chart")
+def spread_chart():
+    """Plotly bar: HRC vs scrap (both $/short ton) vs the EAF metal spread."""
+    hrc = SPREAD.get("hrc_price")
+    scrap = SPREAD.get("scrap_price")
+    g2s = SPREAD.get("gross_to_short", 1.12)
+    scrap_st = round(scrap / g2s)
+    spread = hrc - scrap_st
+    x = ["HRC (SMU)", "Scrap (RMDAS, /st)", "EAF spread"]
+    y = [hrc, scrap_st, spread]
+    colors = ["#378ADD", "#D85A30", "#1D9E75"]
+    return JSONResponse(content=_bar_fig(x, y, colors, "US EAF metal spread ($/short ton)", "$/short ton"))

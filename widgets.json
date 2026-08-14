@@ -27,6 +27,34 @@
     "gridData": { "w": 40, "h": 6 },
     "source": "MetalsDesk"
   },
+  "movers_chart": {
+    "name": "Daily Movers",
+    "description": "Today's percent move across covered names",
+    "category": "MetalsDesk",
+    "type": "chart",
+    "endpoint": "movers_chart",
+    "gridData": { "w": 13, "h": 9 },
+    "source": "MetalsDesk",
+    "refetchInterval": 600000
+  },
+  "marketcap_chart": {
+    "name": "Market Cap Comparison",
+    "description": "Market cap in $B across covered names",
+    "category": "MetalsDesk",
+    "type": "chart",
+    "endpoint": "marketcap_chart",
+    "gridData": { "w": 13, "h": 9 },
+    "source": "MetalsDesk"
+  },
+  "spread_chart": {
+    "name": "EAF Spread Chart",
+    "description": "HRC vs scrap vs the EAF metal spread",
+    "category": "MetalsDesk",
+    "type": "chart",
+    "endpoint": "spread_chart",
+    "gridData": { "w": 14, "h": 9 },
+    "source": "MetalsDesk"
+  },
   "market_tape": {
     "name": "Metals Coverage Tape",
     "description": "Covered metals names with segment, market cap and capacity",

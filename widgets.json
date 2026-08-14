@@ -27,15 +27,14 @@
     "gridData": { "w": 40, "h": 6 },
     "source": "MetalsDesk"
   },
-  "movers_chart": {
-    "name": "Daily Movers",
-    "description": "Today's percent move across covered names",
+  "capacity_map_chart": {
+    "name": "Capacity by Furnace Type",
+    "description": "Capacity per company colored by furnace type (scrap vs ore vs alumina)",
     "category": "MetalsDesk",
     "type": "chart",
-    "endpoint": "movers_chart",
+    "endpoint": "capacity_map_chart",
     "gridData": { "w": 13, "h": 9 },
-    "source": "MetalsDesk",
-    "refetchInterval": 600000
+    "source": "MetalsDesk"
   },
   "marketcap_chart": {
     "name": "Market Cap Comparison",

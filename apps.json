@@ -16,7 +16,7 @@
             "x": 0,
             "y": 0,
             "w": 25,
-            "h": 8,
+            "h": 10,
             "state": { "params": {} }
           },
           {
@@ -24,21 +24,45 @@
             "x": 25,
             "y": 0,
             "w": 15,
-            "h": 8,
+            "h": 10,
             "state": { "params": {} }
           },
           {
             "i": "market_tape",
             "x": 0,
-            "y": 8,
+            "y": 10,
             "w": 40,
             "h": 8,
             "state": { "params": {} }
           },
           {
+            "i": "movers_chart",
+            "x": 0,
+            "y": 18,
+            "w": 13,
+            "h": 9,
+            "state": { "params": {} }
+          },
+          {
+            "i": "marketcap_chart",
+            "x": 13,
+            "y": 18,
+            "w": 13,
+            "h": 9,
+            "state": { "params": {} }
+          },
+          {
+            "i": "spread_chart",
+            "x": 26,
+            "y": 18,
+            "w": 14,
+            "h": 9,
+            "state": { "params": {} }
+          },
+          {
             "i": "company_overview",
             "x": 0,
-            "y": 16,
+            "y": 27,
             "w": 20,
             "h": 8,
             "state": { "params": { "ticker": "NUE" } }
@@ -46,7 +70,7 @@
           {
             "i": "company_capacity_table",
             "x": 20,
-            "y": 16,
+            "y": 27,
             "w": 20,
             "h": 8,
             "state": { "params": { "ticker": "NUE" } }
@@ -54,7 +78,7 @@
           {
             "i": "company_capacity",
             "x": 0,
-            "y": 24,
+            "y": 35,
             "w": 20,
             "h": 12,
             "state": { "params": { "ticker": "NUE" } }
@@ -62,7 +86,7 @@
           {
             "i": "company_briefing",
             "x": 20,
-            "y": 24,
+            "y": 35,
             "w": 20,
             "h": 12,
             "state": { "params": { "ticker": "NUE" } }
@@ -70,7 +94,7 @@
           {
             "i": "data_sources",
             "x": 0,
-            "y": 36,
+            "y": 47,
             "w": 40,
             "h": 6,
             "state": { "params": {} }

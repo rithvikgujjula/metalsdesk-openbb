@@ -36,7 +36,7 @@
         { "product": "Structural", "capacity_mt": 4.5 },
         { "product": "Plate", "capacity_mt": 3.5 }
       ],
-      "briefing": "### Nucor (NUE): trader read\n\nThe bellwether. Largest US steelmaker at roughly 25 to 30 percent of domestic capacity, all electric arc furnace, so the cost base flexes with scrap instead of sitting in fixed blast furnace overhead. Nucor sets the HRC spot price the rest of the market follows.\n\nThe swing factor is the metal spread: HRC selling price minus busheling scrap. When it widens, Nucor prints. Diversified across sheet, bar, structural and plate, which smooths the cycle versus a pure flat rolled name.\n\n**Watch:** scrap costs, non residential construction, tariff headlines."
+      "briefing": "### Nucor (NUE): what matters\n\nThe largest scrap consumer in North America, so its melt rate is a direct read on prime scrap demand. Nucor posts a weekly consumer spot price for HRC that the rest of the sheet market prices off, so the Monday CSP move sets the tone.\n\n**Assets and supply:** sheet, bar, structural and plate mills across the US, plus a large new sheet mill ramping in West Virginia that adds flat roll into the East. More Nucor tons means more busheling pulled from the market.\n\n**Catalysts:** weekly HRC price changes, Section 232 tariff headlines, scrap generation and obsolete flows, non residential construction and data center demand."
     },
     "STLD": {
       "name": "Steel Dynamics, Inc.",
@@ -57,7 +57,7 @@
         { "product": "Long Products", "capacity_mt": 2.8 },
         { "product": "Sinton (new mill)", "capacity_mt": 1.8 }
       ],
-      "briefing": "### Steel Dynamics (STLD): trader read\n\nThe growth EAF. Number three US carbon steel producer, same scrap fed model as Nucor with a lower cost reputation. The Sinton, Texas mill is the story: as it ramps it adds flat roll supply into the South and lifts volumes.\n\nVertically integrated into scrap through OmniSource, which hedges the input side. Moves in step with Nucor on the same spread and tariff drivers.\n\n**Watch:** Sinton utilization, the scrap spread, fabrication backlog."
+      "briefing": "### Steel Dynamics (STLD): what matters\n\nScrap fed sheet and long products, and one of the largest metals recyclers through OmniSource, so it sits on both sides of the ferrous trade.\n\n**Assets and supply:** the Sinton, Texas flat roll mill is the swing tonnage, ramping toward full run rate and pushing sheet into the South and Mexico. A new aluminum flat rolled mill in Mississippi opens a second commodity exposure.\n\n**Catalysts:** Sinton utilization and yield, the scrap spread, Southern and Mexican demand, the aluminum ramp timeline."
     },
     "CLF": {
       "name": "Cleveland-Cliffs Inc.",
@@ -79,7 +79,7 @@
         { "product": "Stainless/Electrical", "capacity_mt": 3.0 },
         { "product": "Other / Slabs", "capacity_mt": 4.0 }
       ],
-      "briefing": "### Cleveland-Cliffs (CLF): trader read\n\nThe high beta integrated play. Largest flat rolled supplier to US autos, running blast furnaces rather than EAFs, so it carries more fixed cost and more operating leverage. It screams higher when steel rallies and hurts when it fades.\n\nOwns its own iron ore, so raw material is internal but capex is heavy. Trades at a cheaper multiple than the EAF names on debt load and thinner diversification.\n\n**Watch:** auto build rates, iron ore, debt maturities, recurring M&A chatter."
+      "briefing": "### Cleveland-Cliffs (CLF): what matters\n\nThe integrated flat roll supplier to Detroit, running blast furnaces and self supplying iron ore, so it drives ore and coking coal demand rather than scrap. Runs an HBI plant in Toledo for metallics.\n\n**Assets and supply:** heavy exposure to auto contract tonnage, plus the Stelco acquisition adding Canadian capacity. Blast furnace idles and restarts are the supply signal to watch, since each moves a lot of tonnage at once.\n\n**Catalysts:** auto build rates and contract talks, iron ore and coke, furnace idles or restarts, flat roll imports."
     },
     "AA": {
       "name": "Alcoa Corporation",
@@ -99,7 +99,7 @@
         { "product": "Alumina (refining)", "capacity_mt": 9.5 },
         { "product": "Bauxite (mining)", "capacity_mt": 42.0 }
       ],
-      "briefing": "### Alcoa (AA): trader read\n\nThe aluminum pure play, a different animal from the steel names. Vertically integrated from bauxite mining through alumina refining to primary metal, so the P&L tracks the LME aluminum price and alumina spot, with smelter power costs as the real swing factor.\n\nThis is not a steel spread story at all. Different commodity, different driver.\n\n**Watch:** LME aluminum, alumina prices, energy contracts, import tariffs."
+      "briefing": "### Alcoa (AA): what matters\n\nUpstream aluminum, not steel. Mines bauxite, refines alumina and smelts primary metal, so the read is LME aluminum, the alumina index and smelter power costs.\n\n**Assets and supply:** global smelters and refineries, with restarts such as San Ciprian and any curtailments as the supply story. Power contracts and energy prices set the marginal cost.\n\n**Catalysts:** LME aluminum and the Midwest premium, alumina prices, tariffs on Canadian and imported metal, smelter curtailments or restarts."
     },
     "RYZ": {
       "name": "Ryerson Holding Corporation (incl. Olympic Steel)",
@@ -120,7 +120,7 @@
         { "product": "Aluminum", "capacity_mt": 0 },
         { "product": "Alloy", "capacity_mt": 0 }
       ],
-      "briefing": "### Ryerson plus Olympic Steel (RYZ): trader read\n\nThe distributor, not a producer. Buys, processes and resells stainless, aluminum, carbon and alloy, so it earns on spread and volume rather than the direction of any one metal.\n\nThe Olympic Steel merger closed early 2026 and lifted revenue more than 30 percent year on year on the combined book. Margins live and die on service center spreads and integration synergies.\n\n**Watch:** service center spreads, synergy delivery, industrial demand. Capacity is not a meaningful metric for a distributor."
+      "briefing": "### Ryerson plus Olympic Steel (RYZ): what matters\n\nA service center and distributor, so it earns the spread between mill buy price and resale plus processing, not flat price direction. A useful read on physical demand and lead times on the ground.\n\n**Assets and supply:** a national network of service centers across stainless, aluminum, carbon and alloy, expanded by the Olympic Steel merger that closed early 2026.\n\n**Catalysts:** service center spreads, mill lead times and restocking, integration synergies, industrial and OEM demand."
     }
   }
 }
